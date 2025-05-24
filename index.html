@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brawl stars battle card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            background-image: url('bk.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .search-container {
+            position: absolute;
+            top: 95px;
+            left: 130px;
+            transform: translateX(-50%);
+            width: 210px;
+            z-index: 1;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 2px solid #7394d7;
+            background-color: rgba(30, 58, 86, 0.8);
+            color: #fff;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            width: 100%;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .paralelogramo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) skew(-10deg);
+            width: 600px;
+            height: 240px;
+            background-color: #4d94fe;
+            border: 2px solid black;
+            z-index: -1;
+        }
+
+        .letras-container  {
+            max-height: 600px;
+            overflow-y: auto;
+            width: 220px;
+            background-color: rgba(30, 58, 86, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: #a8d8ff;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-40%);
+			overflow-y: auto;
+			max-height: 400px;
+
+        }
+		/* Para navegadores Firefox */
+.letras-container {
+    scrollbar-width: thin; /* Tamanho fino */
+    scrollbar-color: #7394d7 #1e3a56; /* Cor do thumb e do trilho */
+}
+        .letra, .letra-img, letra-img {
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 50px;
+            text-align: center;
+        }
+
+        .letra:hover, .letra-img:hover {
+            transform: scale(1.2);
+        }
+
+        .quadrados-container {
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            top: 25%;
+            transform: translateY(-70%);
+        }
+
+        .ret { 
+            width:160px;
+            height: 110px;
+            border: 5px solid black;
+            background-color: rgb(255,255,255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            left: 0%;
+            border-radius: 23%;
+            transform: translateY(6%);
+        }
+
+        .quadrado {
+            width: 130px;
+            height: 130px;
+            border: 5px solid black;
+            background-color: #4682b4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #1f4bce;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            left: 0%;
+            border-radius: 0%;
+        }
+
+        .quadrado img {
+            width: 130px;  /* Tamanho da imagem no quadrado */
+            height: 130px; /* Tamanho da imagem no quadrado */
+            transform: translateX(-31%);
+        }
+
+        .ret img {
+            width: 140px;  /* Largura da imagem no retângulo */
+            height: 140px; /* Altura da imagem no retângulo */
+			top: 50%;
+			transform: translate(-31%, -5%);
+        }
+
+        /* Novo estilo para o título */
+        .titulo {
+            font-size: 20px;
+            font-family: 'Lilita one', cursive;
+            color: #f9d025;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 5px;
+            display: block; /* Agora é visível na barra de escolha */
+        }
+
+        /* Estilo para o título abaixo dos quadrados */
+        .titulo-copiado {
+            font-size: 40px;
+            font-family: 'Lilita one', cursive;
+            color: #f9d025;
+            text-align: center;
+            position: absolute;
+            transform: translate(-15%, 175%);
+			text-shadow: #ffce00 1px 0 10px;
+			
+
+        }
+		
+		.lilita-one-regular {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  transform: translate(0%, -350%);
+  font-size: 40px;
+}
+	.lilita-one-regular1 {
+  font-family: "Lilita One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  transform: translate(-10%, -1500%);
+  color: #204474;
+
+  font-size: 20px;
+}
+
+		        /* Botão "!" no canto da tela */
+        .botao-alerta {
+            position: fixed;
+            bottom: 550px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+
+        /* Estilo da janela modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 61%;
+            transform: translate(50%, -50%);
+            background-color: transparent;
+            color: White;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 300px;
+            width: 100%;
+            z-index: 1001;
+			font-family: 'lilita-one-regular', cursive;
+        }
+
+        .modal-content {
+            background-color: #4884b4;
+            padding: 30px;
+            border-radius: 30px;
+			top: 510%;
+        }
+
+        .fechar-modal {
+            background-color: #08698a;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+			border-color: black;
+            cursor: pointer;
+            margin-top: 0px;
+        }
+		
+    </style>
+</head>
+<body>
+
+
+
+
+	    <button class="mudar-fundo-btn" onclick="mudarFundo()">Mudar Fundo</button>
+
+
+    <!-- Barra de pesquisa separada e posicionada -->
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search for cosmetics">
+    </div>
+	<div class="lilita-one-regular"> Double click to remove cosmetics </div>
+    <div class="main-container">
+        <!-- Paralelogramo -->
+        <div class="paralelogramo"></div>
+
+        <!-- Área de seleção de letras e imagens -->
+        <div class="letras-container">
+            <div class="letra-img" id="stu"><img src="stu.png" alt="Stu" width="40px" height="40px"></div>
+            <div class="letra-img" id="shelly"><img src="shelly1.png" alt="Shelly" width="40px" height="40px"></div>
+			<div class="letra-img" id="summersweat"><img src="https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC9MN3lVb0FWblQ5RXNURWhYWWJvaS5wbmcifQ:supercell:3JqQCOFHRFuvbiaXGqp3kcww4VWLu3otQp3-3AQMKJM?width=2400"  width="40px" height="40px" ></div>
+			<div class="letra-img" id="champiedown"><img src="https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC9IUVExZ3ZwbU4zU0JGQjRtbWphdy5wbmcifQ:supercell:g0ntQUYm-7UAiSK-l9qBubcL47ZtVAy_wr5aMSli9_Y?width=2400"   width="40px" height="40px" ></div>
+			 <div class="letra-img" id="barleyphew"><img src= "https://cdn-assets-eu.frontify.com/s3/frontify-enterprise-files-eu/eyJwYXRoIjoic3VwZXJjZWxsXC9maWxlXC9wNVlOemZLSDM1aDJkdnN4bWIxRS5wbmcifQ:supercell:h_Opx9Wplb73WlWqoL8LluN-N_AvmWfGD3jVWY-dA04?width=2400" width="40px" height="40px" ></div>
+			
+			
+			
+			
+			
+			<div class="titulo" id="tituloElMariachi">El Mariachi</div>
+			<div class="titulo" id="tituloMasterOfDisaster">Master of Disaster</div>
+			<div class="titulo" id="tituloLetMeCook"> Let me cook</div>
+	
+	
+	
+        </div>
+        <!-- Quadrados para imagens ou letras -->
+        <div class="quadrados-container">
+            <div class="quadrado" id="quadrado1"></div>
+            <div class="quadrado" id="quadrado2"></div>
+            <div class="ret" id="ret"></div>
+        </div>
+
+    </div>
+	
+	<h1 class="lilita-one-regular1"> Made by godoyu </h1>
+	
+    <script>
+        let letraSelecionada = null;
+
+        const letras = document.querySelectorAll('.letra, .letra-img');
+        const quadrados = document.querySelectorAll('.quadrado, .ret');
+        const tituloElMariachi = document.getElementById('tituloElMariachi');
+        const mainContainer = document.querySelector('.main-container');
+
+        letras.forEach(letra => {
+            letra.addEventListener('click', function() {
+                if (letraSelecionada) {
+                    letraSelecionada.classList.remove('selecionada');
+                }
+                letraSelecionada = letra;
+                letra.classList.add('selecionada');
+            });
+        });
+
+        quadrados.forEach(quadrado => {
+            quadrado.addEventListener('click', function() {
+                if (letraSelecionada) {
+                    const copia = letraSelecionada.cloneNode(true);
+
+                    if (copia.tagName.toLowerCase() === 'img') {
+                        if (quadrado.classList.contains('ret')) {
+                            copia.width = 110;
+                            copia.height = 110;
+                            copia.style.border = '5px solid #000';
+                        } else {
+                            if (letraSelecionada.classList.contains('letra-img')) {
+                                copia.height = 110;
+								copia.width=110;
+                            } else {
+                                copia.width = 100;
+                                copia.height = 10;
+                                copia.style.border = 'none';
+                            }
+                        }
+                    }
+
+                    quadrado.innerHTML = '';  
+                    quadrado.appendChild(copia);
+
+                    letraSelecionada.classList.remove('selecionada');
+                    letraSelecionada = null;
+                }
+            });
+        });
+
+        // Limpar o quadrado com duplo clique
+        quadrados.forEach(quadrado => {
+            quadrado.addEventListener('dblclick', function() {
+                quadrado.innerHTML = '';  
+            });
+        });
+
+        // Filtrando as letras e imagens com base na pesquisa
+        const searchInput = document.getElementById('search');
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.toLowerCase();
+            letras.forEach(letra => {
+                const text = letra.textContent.toLowerCase();
+                const imgAlt = letra.querySelector('img') ? letra.querySelector('img').alt.toLowerCase() : '';
+                if (text.includes(query) || imgAlt.includes(query)) {
+                    letra.style.display = 'block';
+                } else {
+                    letra.style.display = 'none';
+                }
+            });
+        });
+
+        // Lógica para criar uma cópia de "El Mariachi" quando clicado
+        tituloElMariachi.addEventListener('click', function() {
+            // Cria a cópia do título e coloca abaixo dos quadrados e retângulo
+            const copiaTitulo = tituloElMariachi.cloneNode(true);
+            copiaTitulo.classList.add('titulo-copiado');
+            mainContainer.appendChild(copiaTitulo);
+        });
+mainContainer.addEventListener('dblclick', function(event) {
+    if (event.target.classList.contains('titulo-copiado')) {
+        event.target.remove();  // Remove o título copiado
+    }
+});
+
+        // Lógica para criar uma cópia de "El Mariachi" quando clicado
+       tituloMasterOfDisaster.addEventListener('click', function() {
+            // Cria a cópia do título e coloca abaixo dos quadrados e retângulo
+            const copiaTitulo = tituloMasterOfDisaster.cloneNode(true);
+            copiaTitulo.classList.add('titulo-copiado');
+            mainContainer.appendChild(copiaTitulo);
+        });
+mainContainer.addEventListener('dblclick', function(event) {
+    if (event.target.classList.contains('titulo-copiado')) {
+        event.target.remove();  // Remove o título copiado
+    }
+});
+
+        // Lógica para alternar os títulos
+        tituloElMariachi.addEventListener('click', () => {
+            if (tituloAtivo !== 'El Mariachi') {
+                // Desativa o outro título
+                if (tituloAtivo === 'Master of Disaster') {
+                    tituloMasterOfDisaster.classList.remove('selecionada');
+                }
+                tituloElMariachi.classList.add('selecionada');
+                tituloAtivo = 'El Mariachi';
+            } else {
+                tituloElMariachi.classList.remove('selecionada');
+                tituloAtivo = null;
+            }
+        });
+
+        tituloMasterOfDisaster.addEventListener('click', () => {
+            if (tituloAtivo !== 'Master of Disaster') {
+                // Desativa o outro título
+                if (tituloAtivo === 'El Mariachi') {
+                    tituloElMariachi.classList.remove('selecionada');
+                }
+                tituloMasterOfDisaster.classList.add('selecionada');
+                tituloAtivo = 'Master of Disaster';
+            } else {
+                tituloMasterOfDisaster.classList.remove('selecionada');
+                tituloAtivo = null;
+            }
+        });
+		
+       // Lógica para criar uma cópia de "El Mariachi" quando clicado
+        tituloLetMeCook.addEventListener('click', function() {
+            // Cria a cópia do título e coloca abaixo dos quadrados e retângulo
+            const copiaTitulo = tituloLetMeCook.cloneNode(true);
+            copiaTitulo.classList.add('titulo-copiado');
+            mainContainer.appendChild(copiaTitulo);
+        });
+mainContainer.addEventListener('dblclick', function(event) {
+    if (event.target.classList.contains('titulo-copiado')) {
+        event.target.remove();  // Remove o título copiado
+    }
+});
+
+
+
+    </script>
+</div>
+</body>
+</html>
